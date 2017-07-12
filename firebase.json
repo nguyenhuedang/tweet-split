@@ -1,0 +1,9 @@
+{
+  "hosting": {
+    "public": "build/default",
+    "rewrites": [{
+      "source": "!{/bower_components,/elements}/**",
+      "destination": "/index.html"
+    }]
+  }
+}
