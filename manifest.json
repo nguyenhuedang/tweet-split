@@ -1,0 +1,7 @@
+{
+  "name": "tweet-split",
+  "short_name": "tweet-split",
+  "description": "Tweet Split",
+  "start_url": "/",
+  "display": "standalone"
+}
