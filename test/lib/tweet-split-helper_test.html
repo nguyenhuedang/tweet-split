@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+  <title>tweet-split-helper test</title>
+
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../../web-component-tester/browser.js"></script>
+
+  <link rel="import" href="../../src/lib/tweet-split-helper.html">
+</head>
+
+<body>
+
+  <test-fixture id="BasicTestFixture">
+    <template>
+      <tweet-split-helper></tweet-split-helper>
+    </template>
+  </test-fixture>
+
+  <script>
+    suite('TweetSplitHelper', () => {
+
+
+      suite('splitMessage', function() {
+        var element = fixture('BasicTestFixture');
+
+        var verifyResults = (parts, message) => {
+          if (parts.some(part => part.length > 50)) {
+            return false;
+          }
+          var messageFromParts = parts.join('').split(/\d+\/\d+\s/g).map(part => part.trim()).join(' ');
+          return messageFromParts.trim() == message.trim();
+        }
+
+        var validMessages = [
+          '',
+          'One',
+          'This message is very simple, it has 50 characters.',
+          'I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself.',
+          'I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself.',
+          'I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself. I can\'t believe Tweeter now supports chunking my messages, so I don\'t have to do it myself.',
+        ]
+
+        var invalidMessages = [
+          'This message is imposible to splitttttttttttttttttttttttttttttttttttttttttttttttttttttttttt.',
+          'This is spartarrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr.',
+        ]
+
+        validMessages.map(message => test(`A valid message with length ${message.length}`, () => {
+          var parts = element.splitMessage(message);
+          expect(verifyResults(parts, message)).to.be.ok;
+        }));
+
+        invalidMessages.map(message => test(`An invalid message with length ${message.length}`, () => {
+          expect(element.splitMessage(message)).to.be.empty;
+        }));
+
+      })
+
+
+    });
+  </script>
+
+
+</body>
+
+</html>
