@@ -21,7 +21,6 @@ before_script:
 - bower install
 script:
 - xvfb-run polymer test --expanded
-after_script:
 - polymer analyze > analysis.json
 - polymer build
 dist: trusty
