@@ -14,12 +14,14 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GITHUB_TOKEN
-  local_dir: build/default/
+  local_dir: build/default
   on:
     branch: master
 before_script:
 - bower install
-- polymer analyze > analysis.json
 script:
 - xvfb-run polymer test --expanded
+after_script:
+- polymer analyze > analysis.json
+- polymer build
 dist: trusty
