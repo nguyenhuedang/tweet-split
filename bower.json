@@ -4,7 +4,11 @@
   "main": "index.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0",
-    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1"
+    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
+    "iron-localstorage": "PolymerElements/iron-localstorage#^2.0.0",
+    "iron-input": "PolymerElements/iron-input#^2.0.0",
+    "iron-autogrow-textarea": "PolymerElements/iron-autogrow-textarea#^2.0.0",
+    "vaadin-checkbox": "vaadin/vaadin-checkbox#^1.0.0-alpha1"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",

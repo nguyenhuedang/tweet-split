@@ -1,6 +1,7 @@
 # \<tweet-split\>
+[![Build Status](https://travis-ci.org/nguyenhuedang/tweet-split.svg?branch=master)](https://travis-ci.org/nguyenhuedang/tweet-split)
 
-Tweet Split
+Tweet Split is a web application that allow user to split the message into many parts, each part has a maximum character limit (default is 50).
 
 ## Install the Polymer-CLI
 

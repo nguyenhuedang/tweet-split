@@ -17,5 +17,9 @@
     "html": {
       "minify": true
     }
-  }]
+  }],
+  "extraDependencies": [
+    "docs.html",
+    "analysis.json"
+  ]
 }

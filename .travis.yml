@@ -6,16 +6,22 @@ language: node_js
 sudo: required
 node_js: stable
 addons:
+  firefox: latest
   apt:
     sources:
     - google-chrome
     packages:
     - google-chrome-stable
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: build/default
+  on:
+    branch: master
 before_script:
-- yarn install
 - bower install
+- polymer analyze > analysis.json
 script:
-- xvfb-run wct --expanded
-after_script:
-- cat $TRAVIS_BUILD_DIR/logs/coverage/lcov.info | ./node_modules/.bin/coveralls
+- xvfb-run polymer test --expanded
 dist: trusty
