@@ -12,7 +12,6 @@
         return 'tweet-split-helper';
       }
 
-
       constructor() {
         super();
         this.PART_MAX_LENGTH = 50;
@@ -48,13 +47,13 @@
       _getSplittingPattern(lengthOfCurrentIndex, lengthOfTotalPartNumber) {
         var messageMaxLength = this.PART_MAX_LENGTH -
           this._getIndicatorLength(lengthOfCurrentIndex, lengthOfTotalPartNumber);
-        var partRegexString = `(.{1,${messageMaxLength}})(?:\\s|$)`;
+        var partRegexString = `(.{1,${messageMaxLength}})(?:\\s|\\n|$)+`;
         var partMaxCount = this._countNumbersHavingLength(lengthOfCurrentIndex);
-        var partLoop = (lengthOfCurrentIndex === lengthOfTotalPartNumber ? '1,' : '') + partMaxCount;
+        var partLoop = '1,' + partMaxCount;
 
         return {
           'part': new RegExp(partRegexString),
-          'group': new RegExp(`^((?:${partRegexString}){${partLoop}})(.*?$)`)
+          'group': new RegExp(`^((?:${partRegexString}){${partLoop}})`)
         }
       }
 
@@ -66,7 +65,7 @@
        * @returns {Array}
        */
       _attempToSplitMessage(lengthOfTotalPartNumber, message) {
-        if (this.PART_MAX_LENGTH * Math.pow(10, lengthOfTotalPartNumber - 2) > message.length) {
+        if (this.PART_MAX_LENGTH * Math.pow(10, lengthOfTotalPartNumber - 3) > message.length) {
           throw new Error("The message can not be splited");
         }
 
@@ -76,16 +75,19 @@
 
         for (var i = 1; i <= lengthOfTotalPartNumber; ++i) {
           var pattern = this._getSplittingPattern(i, lengthOfTotalPartNumber);
+
           var regexExecData = pattern.group.exec(processMessage);
+
           if (!regexExecData) {
             break;
           }
-          var splittedGroup = regexExecData[1];
+          var splittedGroup = regexExecData[0];
+          processMessage = processMessage.slice(splittedGroup.length);
+
           var parts = splittedGroup.split(pattern.part).filter(part => part.length > 0);
 
           totalLength += splittedGroup.length;
           splittedParts = splittedParts.concat(...parts);
-          processMessage = regexExecData[3];
         }
 
         if (totalLength < message.length) {
