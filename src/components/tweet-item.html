@@ -2,6 +2,31 @@
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../components/tweet-shared-styles.html">
 
+<!--
+`<tweet-item>` is a single tweet text view for a tweet. The tweet input should be under format
+
+    {
+        parts: ['Content of part 1', 'Content of part 2', etc.]
+    }
+
+For example:
+
+    <tweet-item id="tweet"></tweet-item>
+
+    <script>
+      document.getElementById('tweet').tweet = {
+        parts: ['Hello World']
+      }
+    </script>
+
+It may include a character counter for debugging.
+  
+    <tweet-item verbose></tweet-item>
+
+@customElement
+@polymer
+@demo demo/tweet-item_demo.html
+-->
 <dom-module id="tweet-item">
   <template>
     <custom-style>
@@ -31,17 +56,13 @@
       <template>
         <div class="part layout horizontal center">
           <div class="flex-auto">[[part]]</div>
-          <div hidden="[[!verbose]]" class="counter flex-none">[[part.length]]</div>
+          <div hidden hidden$="[[!verbose]]" class="counter flex-none">[[part.length]]</div>
         </div>
       </template>
     </dom-repeat>
   </template>
 
   <script>
-    /**
-     * @customElement
-     * @polymer
-     */
     class TweetItem extends Polymer.Element {
       static get is() {
         return 'tweet-item';

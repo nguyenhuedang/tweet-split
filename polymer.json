@@ -17,10 +17,5 @@
     "html": {
       "minify": true
     }
-  }],
-  "sources": [
-    "docs.html",
-    "analysis.json",
-    "bower_components/**/*"
-  ]
+  }]
 }
