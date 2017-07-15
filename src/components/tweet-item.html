@@ -1,0 +1,60 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../components/tweet-shared-styles.html">
+
+<dom-module id="tweet-item">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="tweet-shared-styles"></style>
+    </custom-style>
+
+    <style>
+       :host {
+        display: block;
+        background: #F4FAFE;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+      }
+
+      .counter {
+        color: #999;
+        font-size: 80%;
+      }
+
+      .part {
+        margin: 8px 0;
+      }
+    </style>
+
+    <dom-repeat items="[[tweet.parts]]" as="part">
+      <template>
+        <div class="part layout horizontal center">
+          <div class="flex-auto">[[part]]</div>
+          <div hidden="[[!verbose]]" class="counter flex-none">[[part.length]]</div>
+        </div>
+      </template>
+    </dom-repeat>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class TweetItem extends Polymer.Element {
+      static get is() {
+        return 'tweet-item';
+      }
+
+      static get properties() {
+        return {
+          tweet: Object,
+          verbose: Boolean
+        };
+      }
+    }
+
+    window.customElements.define(TweetItem.is, TweetItem);
+  </script>
+</dom-module>

@@ -1,0 +1,146 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html"> /**
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/polymer/lib/utils/debounce.html">
+
+<link rel="import" href="../lib/tweet-split-helper.html">
+<link rel="import" href="../components/tweet-shared-styles.html">
+
+<dom-module id="tweet-input">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="tweet-shared-styles"></style>
+    </custom-style>
+
+    <style>
+       :host {
+        display: block;
+        background: var(--paper-blue-300);
+        @apply --paper-font-mono;
+      }
+
+      #submitButton {
+        margin-left: 10px;
+        font-family: monospace;
+        background: var(--primary-color);
+        border: none;
+        color: white;
+        font-size: 14px;
+        padding: 10px 30px;
+        border-radius: 20px;
+        width: 108px;
+      }
+
+      #submitButton[disabled] {
+        opacity: 0.5;
+      }
+
+      iron-autogrow-textarea {
+        border: none;
+        width: 100%;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+        overflow: visible;
+
+        --iron-autogrow-textarea: {
+          border: 2px solid var(--primary-color);
+          border-radius: 5px;
+
+          padding: 15px;
+          box-sizing: border-box;
+        }
+      }
+
+      form {
+        padding: 0;
+        margin: 0;
+      }
+
+      .error-message {
+        color: #db4437;
+        font-size: 90%;
+      }
+    </style>
+
+    <tweet-split-helper id="helper"></tweet-split-helper>
+    <form id="form" class="layout vertical end">
+      <iron-autogrow-textarea rows="3" id="messageInput" bind-value="{{message}}" invalid="[[!valid]]" auto-validate>
+      </iron-autogrow-textarea>
+      <div class="layout horizontal">
+        <div class="error-message flex-auto" hidden="[[valid]]">[[errorMessage]]</div>
+        <button id="submitButton" class="flex-none" type="submit" disabled$="[[!valid]]">Tweet</button>
+      </div>
+    </form>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class TweetInput extends Polymer.Element {
+      static get is() {
+        return 'tweet-input';
+      }
+
+      static get properties() {
+        return {
+          message: {
+            type: String,
+            observer: '_messageChanged'
+          },
+          valid: {
+            type: Boolean,
+            value: false,
+          },
+          errorMessage: String,
+        };
+      }
+
+      _validate(message) {
+        if (!message) {
+          return this.set('errorMessage', null);
+        }
+
+        if (!this._canSplitMessage(message)) {
+          return this.set('errorMessage', 'We can\'t send your tweet because it\'s unbreakable.');
+        }
+
+        this.set('valid', true)
+      }
+
+      _messageChanged(message) {
+        this.set('valid', false);
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
+          Polymer.Async.timeOut.after(250), () => this._validate(message));
+      }
+
+      _sendMessage() {
+        if (!this.$.messageInput.invalid) {
+          var sendMessageEvent = new CustomEvent('send-message', {
+            detail: {
+              message: this.message
+            }
+          });
+          this.dispatchEvent(sendMessageEvent);
+        }
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+
+        this.$.form.addEventListener('submit', event => {
+
+          event.preventDefault();
+          this._sendMessage();
+        });
+      }
+
+      _canSplitMessage(message) {
+        return this.$.helper.splitMessage(message).length > 0;
+      }
+    }
+
+    window.customElements.define(TweetInput.is, TweetInput);
+  </script>
+</dom-module>

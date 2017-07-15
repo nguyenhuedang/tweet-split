@@ -1,13 +1,40 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html">
+
+<link rel="import" href="../lib/tweet-split-helper.html">
+
+<link rel="import" href="../components/tweet-list.html">
+<link rel="import" href="../components/tweet-input.html">
+<link rel="import" href="../components/tweet-shared-styles.html">
 
 <dom-module id="tweet-split-app">
   <template>
+    <custom-style>
+      <style is="custom-style" include="tweet-shared-styles"></style>
+    </custom-style>
+
     <style>
-      :host {
+       :host {
         display: block;
+        --primary-color: #1da1f2;
+        font-family: monospace;
+        max-width: 440px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        min-height: 100%;
       }
     </style>
-    <h2>Hello [[prop1]]!</h2>
+
+
+    <tweet-input id="input"></tweet-input>
+    <iron-localstorage name="tweets" value="{{tweets}}" on-iron-localstorage-load-empty="_initTweets"></iron-localstorage>
+    <iron-localstorage name="verbose" value="{{verbose}}"></iron-localstorage>
+    <vaadin-checkbox checked="{{verbose}}">Display verbose information</vaadin-checkbox>
+
+    <tweet-list tweets="[[tweets]]" verbose="[[verbose]]"></tweet-list>
+    <tweet-split-helper id="helper"></tweet-split-helper>
   </template>
 
   <script>
@@ -16,15 +43,40 @@
      * @polymer
      */
     class TweetSplitApp extends Polymer.Element {
-      static get is() { return 'tweet-split-app'; }
+      static get is() {
+        return 'tweet-split-app';
+      }
+
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'tweet-split-app'
-          }
+          tweets: {
+            type: Array,
+          },
+          verbose: Boolean,
         };
       }
+
+      _initTweets() {
+        this.set('tweets', []);
+      }
+
+      _handleSendMessage(event) {
+        this.unshift('tweets', {
+          parts: this.$.helper.splitMessage(event.detail.message)
+        });
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this.$.input.addEventListener('send-message', e => this._handleSendMessage(e));
+
+        // window.helper = this.$.helper;
+        // var message = 'This message is imposible to splitt.';
+        // var parts = helper.splitMessage(message);
+        // console.log(parts);
+        // console.log(this.verifyResults(parts, message));
+      }
+
     }
 
     window.customElements.define(TweetSplitApp.is, TweetSplitApp);
