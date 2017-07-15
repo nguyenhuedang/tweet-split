@@ -17,7 +17,7 @@
       "minify": true
     }
   }, {
-    "name": "src",
+    "name": "doc",
     "js": {
       "minify": false,
       "compile": false
@@ -30,7 +30,6 @@
     }
   }],
   "sources": [
-    "demo/**",
     "docs.html",
     "bower_components/**/*",
     "analysis.json"
