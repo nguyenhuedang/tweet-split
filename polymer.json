@@ -21,6 +21,6 @@
   "sources": [
     "docs.html",
     "analysis.json",
-    "bower_components/iron-component-page/**/*"
+    "bower_components/**/*"
   ]
 }
