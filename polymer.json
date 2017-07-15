@@ -18,8 +18,9 @@
       "minify": true
     }
   }],
-  "extraDependencies": [
+  "sources": [
     "docs.html",
-    "analysis.json"
+    "analysis.json",
+    "bower_components/iron-component-page/**/*"
   ]
 }
