@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 50px">TweetSplit</p>
+<h1 align="center">TweetSplit</h1>
 <p align="center"><a href="https://travis-ci.org/nguyenhuedang/tweet-split"><img src="https://travis-ci.org/nguyenhuedang/tweet-split.svg?branch=master"></a>
 </p>
 
