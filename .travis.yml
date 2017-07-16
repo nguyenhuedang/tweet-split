@@ -21,7 +21,7 @@ before_script:
 - bower install
 script:
 - xvfb-run polymer test --expanded
-- wct --plugin sauce
+- polymer test --plugin sauce
 - polymer analyze > analysis.json
 - polymer build
 dist: trusty
