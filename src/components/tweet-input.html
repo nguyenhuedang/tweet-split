@@ -118,8 +118,8 @@ If not, the component will notify user by the error message.
            */
           errorMessage: {
             type: String,
-            value: 'We can\'t send your tweet because it\'s unbreakable.'
-          }
+            value: 'We can\'t send your tweet because it\'s unbreakable.',
+          },
         };
       }
 
@@ -132,7 +132,7 @@ If not, the component will notify user by the error message.
           return this.set('_errorMessage', this.errorMessage);
         }
 
-        this.set('valid', true)
+        this.set('valid', true);
       }
 
       _messageChanged(message) {
@@ -145,8 +145,8 @@ If not, the component will notify user by the error message.
         if (!this.$.messageInput.invalid) {
           var sendMessageEvent = new CustomEvent('send-message', {
             detail: {
-              message: this.message
-            }
+              message: this.message,
+            },
           });
           this.dispatchEvent(sendMessageEvent);
         }
@@ -155,7 +155,7 @@ If not, the component will notify user by the error message.
       connectedCallback() {
         super.connectedCallback();
 
-        this.$.form.addEventListener('submit', event => {
+        this.$.form.addEventListener('submit', (event) => {
           event.preventDefault();
           this._sendMessage();
         });

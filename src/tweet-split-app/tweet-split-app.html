@@ -35,6 +35,7 @@
         background: white;
         min-height: 100%;
       }
+
     </style>
 
     <tweet-input id="input"></tweet-input>
@@ -55,7 +56,7 @@
       static get properties() {
         return {
           /**
-           * The tweets that will be saved in browser's localStorage 
+           * The tweets that will be saved in browser's localStorage
            */
           tweets: {
             type: Array,
@@ -74,17 +75,18 @@
 
       _handleSendMessage(event) {
         this.unshift('tweets', {
-          parts: this.$.helper.splitMessage(event.detail.message)
+          parts: this.$.helper.splitMessage(event.detail.message),
         });
       }
 
       connectedCallback() {
         super.connectedCallback();
-        this.$.input.addEventListener('send-message', e => this._handleSendMessage(e));
-
+        this.$.input.addEventListener('send-message',
+          (e) => this._handleSendMessage(e));
       }
     }
 
     window.customElements.define(TweetSplitApp.is, TweetSplitApp);
+
   </script>
 </dom-module>

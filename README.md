@@ -1,6 +1,12 @@
 <h1 align="center">TweetSplit</h1>
-<p align="center"><a href="https://travis-ci.org/nguyenhuedang/tweet-split"><img src="https://travis-ci.org/nguyenhuedang/tweet-split.svg?branch=master"></a>
+<p align="center"><a href="https://travis-ci.org/nguyenhuedang/tweet-split"><img src="https://travis-ci.org/nguyenhuedang/tweet-split.svg?branch=master"></a> <a href="https://saucelabs.com/beta/builds/34d6c37ef98b4fc5a2908617730c17e7"><img src="https://saucelabs.com/buildstatus/dangnguyen" alt="Build Status"></a>
 </p>
+
+<p align="center">
+  <a href="https://saucelabs.com/beta/builds/34d6c37ef98b4fc5a2908617730c17e7"><img src="https://saucelabs.com/browser-matrix/dangnguyen.svg" alt="Browser Matrix"></a>
+</p>
+
+
 
 # About the project
 Tweet Split is a web application that allow user to split the message into many parts, each part has a maximum character limit (default is 50).

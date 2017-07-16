@@ -21,6 +21,7 @@ It may include a character counter for debugging.
        :host {
         display: block;
       }
+
     </style>
 
     <dom-repeat items="[[tweets]]" as="tweet">
@@ -39,13 +40,14 @@ It may include a character counter for debugging.
       static get properties() {
         return {
           tweets: {
-            type: Array
+            type: Array,
           },
-          verbose: Boolean
+          verbose: Boolean,
         };
       }
     }
 
     window.customElements.define(TweetList.is, TweetList);
+
   </script>
 </dom-module>

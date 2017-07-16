@@ -50,6 +50,7 @@ It may include a character counter for debugging.
       .part {
         margin: 8px 0;
       }
+
     </style>
 
     <dom-repeat items="[[tweet.parts]]" as="part">
@@ -71,11 +72,12 @@ It may include a character counter for debugging.
       static get properties() {
         return {
           tweet: Object,
-          verbose: Boolean
+          verbose: Boolean,
         };
       }
     }
 
     window.customElements.define(TweetItem.is, TweetItem);
+
   </script>
 </dom-module>

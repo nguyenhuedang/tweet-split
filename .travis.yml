@@ -18,10 +18,12 @@ deploy:
   on:
     branch: master
 before_script:
+- npm install -g web-component-tester
 - bower install
 script:
+- eslint . --ext js,html
 - xvfb-run polymer test --expanded
-- polymer test --plugin sauce
+- wct --plugin sauce
 - polymer analyze > analysis.json
 - polymer build
 dist: trusty
