@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>tweet-list demo</title>
+
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../src/components/tweet-list.html">
+
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+
+    </style>
+  </custom-style>
+</head>
+
+<body unresolved>
+  <div class="vertical-section-container centered">
+    <h3>A basis tweet list</h3>
+    <demo-snippet>
+      <template>
+        <tweet-list id="tweetList"></tweet-list>
+
+        <script>
+          var tweetsData = [{
+            parts: ['Hello Jane']
+          }, {
+            parts: ['It is nine to meet', 'How are you?']
+          }, {
+            parts: ['Bye']
+          }];
+
+          document.getElementById('tweetList').tweets = tweetsData;
+        </script>
+      </template>
+    </demo-snippet>
+
+    <h3>Debugging the tweet with verbose information</h3>
+    <demo-snippet>
+      <template>
+        <tweet-list verbose id="verboseTweetList"></tweet-list>
+
+        <script>
+          document.getElementById('verboseTweetList').tweets = [{
+            parts: ['Hi, did you see my characters counter next to me?']
+          }]
+        </script>
+      </template>
+
+    </demo-snippet>
+
+    <script>
+    </script>
+</body>
+
+</html>

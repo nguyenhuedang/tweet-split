@@ -1,27 +1,32 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=0.8, initial-scale=1, user-scalable=yes">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=0.8, initial-scale=1, user-scalable=yes">
 
-  <title>Tweet Split</title>
-  <meta name="description" content="Tweet Split">
-  <link rel="manifest" href="./manifest.json">
-  <script src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="./src/tweet-split-app/tweet-split-app.html">
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: #e6ecf0;
-    }
-  </style>
-</head>
+    <title>Tweet Split</title>
+    <meta name="description" content="Tweet Split">
+    <link rel="manifest" href="./manifest.json">
+    <script src="./bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="./src/tweet-split-app/tweet-split-app.html">
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e6ecf0;
+      }
 
-<body>
-  <tweet-split-app></tweet-split-app>
-</body>
+      tweet-split-app {
+        --tweet-primary-color: red;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <tweet-split-app></tweet-split-app>
+  </body>
 
 </html>

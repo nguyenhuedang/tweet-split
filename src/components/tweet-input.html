@@ -6,6 +6,16 @@
 <link rel="import" href="../lib/tweet-split-helper.html">
 <link rel="import" href="../components/tweet-shared-styles.html">
 
+<!--
+`<tweet-input>` consists of a text area field to let user enter the tweet message and a button to send it
+
+It validates with real-time the tweet message, whether it can be splitted or not.
+If not, the component will notify user by the error message.
+
+@customElement
+@polymer
+@demo demo/components/tweet-input_demo.html
+-->
 <dom-module id="tweet-input">
   <template>
     <custom-style>
@@ -60,24 +70,21 @@
         color: #db4437;
         font-size: 90%;
       }
+
     </style>
 
     <tweet-split-helper id="helper"></tweet-split-helper>
-    <form id="form" class="layout vertical end">
+    <form id="form" class="layout vertical">
       <iron-autogrow-textarea rows="3" id="messageInput" bind-value="{{message}}" invalid="[[!valid]]" auto-validate>
       </iron-autogrow-textarea>
-      <div class="layout horizontal">
-        <div class="error-message flex-auto" hidden="[[valid]]">[[errorMessage]]</div>
+      <div class="layout horizontal end">
+        <div class="error-message flex-auto self-start">[[_errorMessage]]</div>
         <button id="submitButton" class="flex-none" type="submit" disabled$="[[!valid]]">Tweet</button>
       </div>
     </form>
   </template>
 
   <script>
-    /**
-     * @customElement
-     * @polymer
-     */
     class TweetInput extends Polymer.Element {
       static get is() {
         return 'tweet-input';
@@ -85,25 +92,44 @@
 
       static get properties() {
         return {
+          /**
+           * The message input by user
+           */
           message: {
             type: String,
-            observer: '_messageChanged'
+            observer: '_messageChanged',
           },
+
+          /**
+           * Whether the input is valid or not
+           */
           valid: {
             type: Boolean,
             value: false,
           },
-          errorMessage: String,
+
+          /**
+           * Will be null if the input is valid, and detailed message otherwise
+           */
+          _errorMessage: String,
+
+          /**
+           * Customize the error message when the string can not be splitted
+           */
+          errorMessage: {
+            type: String,
+            value: 'We can\'t send your tweet because it\'s unbreakable.'
+          }
         };
       }
 
       _validate(message) {
         if (!message) {
-          return this.set('errorMessage', null);
+          return this.set('_errorMessage', null);
         }
 
         if (!this._canSplitMessage(message)) {
-          return this.set('errorMessage', 'We can\'t send your tweet because it\'s unbreakable.');
+          return this.set('_errorMessage', this.errorMessage);
         }
 
         this.set('valid', true)
@@ -130,17 +156,23 @@
         super.connectedCallback();
 
         this.$.form.addEventListener('submit', event => {
-
           event.preventDefault();
           this._sendMessage();
         });
       }
 
       _canSplitMessage(message) {
-        return this.$.helper.splitMessage(message).length > 0;
+        return Boolean(this.$.helper.splitMessage(message));
       }
+
+      /**
+      Fired when user tap the Tweet button
+      @event send-message
+      Event param: {{message: String}} detail Contains the sending message
+      */
     }
 
     window.customElements.define(TweetInput.is, TweetInput);
+
   </script>
 </dom-module>

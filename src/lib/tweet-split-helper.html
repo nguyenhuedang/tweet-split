@@ -1,12 +1,36 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 
+<!--
+`<tweet-split-helper>` contains main business logics of the app. There are 3 ways to use the helper:
+
+1. Define the helper element in the main HTML document
+```html
+<tweet-split-helper id="helper"></tweet-split-helper>
+<script>
+    document.getElementById('helper').splitMessage('The input message');
+</script>
+```
+
+2. Create element with `createElement`
+```javascript
+var helper = document.createElement('tweet-split-helper');
+helper.splitMessage('The input message');
+```
+
+3. Using constructor
+```javascript
+var helper = new TweetSplitHelper();
+helper.splitMessage('The input message');
+```
+
+
+@customElement
+@polymer
+@demo demo/lib/tweet-split-helper_demo.html
+-->
 <dom-module id="tweet-split-helper">
   <script>
     const PART_MAX_LENGTH = 50;
-    /**
-     * @customElement
-     * @polymer
-     */
     class TweetSplitHelper extends HTMLElement {
       static get is() {
         return 'tweet-split-helper';
@@ -116,6 +140,10 @@
        * @return {Array}
        */
       splitMessage(message) {
+        if (!message) {
+          return null;
+        }
+
         if (message.length <= this.PART_MAX_LENGTH) {
           return [message];
         }
@@ -126,7 +154,7 @@
           var fullParts = messageParts.map(this._fillIndicator);
           return fullParts;
         } catch (error) {
-          return [];
+          return null;
         }
       }
     }

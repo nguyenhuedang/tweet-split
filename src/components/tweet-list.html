@@ -2,6 +2,19 @@
 <link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
 <link rel="import" href="../components/tweet-item.html">
 
+<!--
+`<tweet-list>` is a list of tweet-item
+    
+    <tweet-list></tweet-list>
+
+It may include a character counter for debugging.
+  
+    <tweet-list verbose></tweet-list>
+
+@customElement
+@polymer
+@demo demo/components/tweet-list_demo.html
+-->
 <dom-module id="tweet-list">
   <template>
     <style>
@@ -18,10 +31,6 @@
   </template>
 
   <script>
-    /**
-     * @customElement
-     * @polymer
-     */
     class TweetList extends Polymer.Element {
       static get is() {
         return 'tweet-list';

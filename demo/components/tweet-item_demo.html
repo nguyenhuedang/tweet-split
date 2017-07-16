@@ -9,20 +9,17 @@
 
   <title>tweet-item demo</title>
 
-  <script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
 
-  <link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../bower_components/iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
-  <link rel="import" href="../bower_components/polymer/lib/elements/dom-bind.html">
-
-
-  <link rel="import" href="../src/components/tweet-item.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+  <link rel="import" href="../../bower_components/polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../src/components/tweet-item.html">
 
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
-      tweet-item,
       iron-autogrow-textarea {
         font-family: monospace;
       }
@@ -64,7 +61,7 @@
       }
 
       document.getElementById('verboseTweetItem').tweet = {
-        parts: ['Hi, did you see my character counters next to me?']
+        parts: ['Hi, did you see my characters counter next to me?']
       }
 
       var realTimeInput = document.getElementById('tweetInput');
