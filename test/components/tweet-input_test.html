@@ -52,6 +52,7 @@
               );
 
               expect(error instanceof Error).to.be.true;
+              expect(error.message).to.be.equal('error-message');
             });
 
           test(

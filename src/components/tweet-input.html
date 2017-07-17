@@ -153,7 +153,8 @@ If not, the component will notify user by the error message.
        */
       _validate(message) {
         this.set('_error',
-          this._computeErrorWhenValidate(message, this.errorMessage));
+          this._computeErrorWhenValidate(message, this.splitErrorMessage)
+        );
       }
 
       /**
