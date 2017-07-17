@@ -2,73 +2,78 @@
 
 <html>
 
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
-  <title>tweet-input demo</title>
+    <title>tweet-input demo</title>
 
-  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../../src/components/tweet-input.html">
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../src/components/tweet-input.html">
 
 
-  <custom-style>
-    <style is="custom-style" include="demo-pages-shared-styles">
-      tweet-input {
-        --primary-color: black;
-        font-family: monospace;
-      }
-    </style>
-  </custom-style>
-</head>
-
-<body unresolved>
-  <div class="vertical-section-container centered">
-    <h3>A black-theme tweet input (set by --primary-color)</h3>
-    <demo-snippet>
-      <style>
-        tweet-input#tweetInput {
-          --primary-color: #1da1f2;
-        }
-
-        #eventLabel {
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        tweet-input {
+          --primary-color: black;
           font-family: monospace;
         }
+
       </style>
+    </custom-style>
+  </head>
 
-      <template>
-        <tweet-input id="tweetInput"></tweet-input>
-
-        <label id="eventLabel">This label will log event when you tap Tweet button</label>
-
-        <script>
-          var eventLabel = document.getElementById('eventLabel');
-          var tweetInput = document.getElementById('tweetInput');
-          tweetInput.addEventListener('send-message', event => {
-            eventLabel.innerText = JSON.stringify(event.detail);
-          })
-        </script>
-      </template>
-    </demo-snippet>
-  </div>
-
-  <div class="vertical-section-container centered">
-    <h3>A green-theme tweet input, along with and customized error message</h3>
-    <demo-snippet>
-      <template>
+  <body unresolved>
+    <div class="vertical-section-container centered">
+      <h3>When the input is valid, tapping Tweet would dispath a send-message event</h3>
+      <demo-snippet>
         <style>
-          tweet-input#red {
-            --primary-color: green;
+          tweet-input#tweetInput {
+            --primary-color: #1da1f2;
           }
+
+          #eventLabel {
+            font-family: monospace;
+          }
+
         </style>
 
-        <tweet-input id="red" message="This-is-very-long-message-that-can-not-be-splitted-to-smaller-parts" error-message="Your tweet contains some very long words."></tweet-input>
-      </template>
-    </demo-snippet>
-  </div>
-</body>
+        <template>
+          <tweet-input id="tweetInput"></tweet-input>
+
+          <label id="eventLabel">This label will log event when you tap Tweet button</label>
+
+          <script>
+            var eventLabel = document.getElementById('eventLabel');
+            var tweetInput = document.getElementById('tweetInput');
+            tweetInput.addEventListener('send-message', event => {
+              eventLabel.innerText = JSON.stringify(event.detail);
+            })
+
+          </script>
+        </template>
+      </demo-snippet>
+    </div>
+
+    <div class="vertical-section-container centered">
+      <h3>A green-theme tweet input, along with and customized error message</h3>
+      <demo-snippet>
+        <template>
+          <style>
+            tweet-input#red {
+              --primary-color: green;
+            }
+
+          </style>
+
+          <tweet-input id="red" message="This-is-very-long-message-that-can-not-be-splitted-to-smaller-parts"
+            split-error-message="Your tweet contains some very long words."></tweet-input>
+        </template>
+      </demo-snippet>
+    </div>
+  </body>
 
 </html>

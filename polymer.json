@@ -33,6 +33,10 @@
     "demo/**",
     "docs.html",
     "bower_components/**/*",
-    "analysis.json"
+    "analysis.json",
+    "test/**/*"
+  ],
+  "extraDependencies": [
+    "logs"
   ]
 }

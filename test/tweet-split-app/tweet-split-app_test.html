@@ -1,56 +1,86 @@
 <!doctype html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
-  <title>tweet-split-app test</title>
+    <title>tweet-split-app test</title>
 
-  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <script src="../../../web-component-tester/browser.js"></script>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
 
-  <link rel="import" href="../../src/tweet-split-app/tweet-split-app.html">
-</head>
+    <link rel="import" href="../../src/tweet-split-app/tweet-split-app.html">
+  </head>
 
-<body>
+  <body>
 
-  <test-fixture id="BasicTestFixture">
-    <template>
-      <tweet-split-app></tweet-split-app>
-    </template>
-  </test-fixture>
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <tweet-split-app></tweet-split-app>
+      </template>
+    </test-fixture>
 
-  <test-fixture id="ChangedPropertyTestFixture">
-    <template>
-      <tweet-split-app prop1="new-prop1"></tweet-split-app>
-    </template>
-  </test-fixture>
+    <script>
+      suite('Unit test', function() {
+        suite('_initTweets', function() {
+          test('should set the tweets to empty when execute',
+            function() {
+              var element = fixture('BasicTestFixture');
+              element._initTweets();
+              expect(element.tweets).to.be.empty;
+            });
+        });
 
-  <script>
-    suite('tweet-split-app', function() {
+        suite('_handleSendMessage', function() {
+          test(
+            'should unshift the message to tweets',
+            function() {
+              var element = fixture('BasicTestFixture');
+              var sendMessageEvent = new CustomEvent('send-message', {
+                detail: {
+                  message: 'Hello world',
+                },
+              });
 
-      // test('instantiating the element with default properties works', function() {
-      //   var element = fixture('BasicTestFixture');
-      //   assert.equal(element.prop1, 'tweet-split-app');
-      //   var elementShadowRoot = element.shadowRoot;
-      //   var elementHeader = elementShadowRoot.querySelector('h2');
-      //   assert.equal(elementHeader.innerHTML, 'Hello tweet-split-app!');
-      // });
+              element._initTweets();
+              element._handleSendMessage(sendMessageEvent);
+              assert.deepEqual(element.tweets[0], {
+                parts: ['Hello world'],
+              });
+            });
+        });
 
-      // test('setting a property on the element works', function() {
-      //   // Create a test fixture
-      //   var element = fixture('ChangedPropertyTestFixture');
-      //   assert.equal(element.prop1, 'new-prop1');
-      //   var elementShadowRoot = element.shadowRoot;
-      //   var elementHeader = elementShadowRoot.querySelector('h2');
-      //   assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
-      // });
+        suite('connectedCallback', function() {
+          var element;
+          var elementInput;
+          var sendMessageEvent;
 
-    });
-  </script>
+          setup(function() {
+            element = fixture('BasicTestFixture');
+            elementInput = element.shadowRoot.getElementById(
+              'input');
+            sendMessageEvent = new CustomEvent('send-message', {
+              detail: {
+                message: 'Hello world',
+              },
+            });
+          });
+
+          test(
+            'should add event listener send-message to method _handleSendMessage',
+            function() {
+              sinon.stub(element, '_handleSendMessage', function() {});
+              elementInput.dispatchEvent(sendMessageEvent);
+              expect(element._handleSendMessage)
+                .to.have.been.calledWith(sendMessageEvent);
+            });
+        });
+      });
+
+    </script>
 
 
-</body>
+  </body>
 
 </html>

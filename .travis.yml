@@ -18,12 +18,14 @@ deploy:
   on:
     branch: master
 before_script:
-- npm install -g web-component-tester
+- npm install -g eslint
 - bower install
 script:
 - eslint . --ext js,html
 - xvfb-run polymer test --expanded
-- wct --plugin sauce
+- cat $TRAVIS_BUILD_DIR/logs/coverage/lcov.info | ./node_modules/.bin/coveralls
+- wct --plugin --expanded sauce
 - polymer analyze > analysis.json
 - polymer build
+
 dist: trusty

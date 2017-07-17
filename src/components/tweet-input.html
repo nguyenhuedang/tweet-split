@@ -74,12 +74,13 @@ If not, the component will notify user by the error message.
     </style>
 
     <tweet-split-helper id="helper"></tweet-split-helper>
+
     <form id="form" class="layout vertical">
-      <iron-autogrow-textarea rows="3" id="messageInput" bind-value="{{message}}" invalid="[[!valid]]" auto-validate>
+      <iron-autogrow-textarea rows="3" id="messageInput" bind-value="{{message}}" auto-validate>
       </iron-autogrow-textarea>
       <div class="layout horizontal end">
-        <div class="error-message flex-auto self-start">[[_errorMessage]]</div>
-        <button id="submitButton" class="flex-none" type="submit" disabled$="[[!valid]]">Tweet</button>
+        <div class="error-message flex-auto self-start">[[_error.message]]</div>
+        <button id="submitButton" class="flex-none" type="submit" disabled$="[[_error]]">Tweet</button>
       </div>
     </form>
   </template>
@@ -98,6 +99,7 @@ If not, the component will notify user by the error message.
           message: {
             type: String,
             observer: '_messageChanged',
+            value: '',
           },
 
           /**
@@ -109,40 +111,66 @@ If not, the component will notify user by the error message.
           },
 
           /**
-           * Will be null if the input is valid, and detailed message otherwise
+           * Will be null if the input is valid, an Error instance otherwise
            */
-          _errorMessage: String,
+          _error: {
+            type: Error,
+            value: new Error(),
+          },
 
           /**
            * Customize the error message when the string can not be splitted
            */
-          errorMessage: {
+          splitErrorMessage: {
             type: String,
             value: 'We can\'t send your tweet because it\'s unbreakable.',
           },
         };
       }
 
-      _validate(message) {
+      /**
+       * Return the Error instance if validation failed, or null otherwise
+       * @param {String} message is the message to validate
+       * @param {String} splitErrorMessage - the spliting Error message
+       * @return {Error}
+       * @return {null}
+       */
+      _computeErrorWhenValidate(message, splitErrorMessage) {
         if (!message) {
-          return this.set('_errorMessage', null);
+          return new Error();
         }
 
         if (!this._canSplitMessage(message)) {
-          return this.set('_errorMessage', this.errorMessage);
+          return new Error(splitErrorMessage);
         }
 
-        this.set('valid', true);
+        return null;
       }
 
+      /**
+       * Set the error value
+       * @param {String} message is the input message
+       */
+      _validate(message) {
+        this.set('_error',
+          this._computeErrorWhenValidate(message, this.errorMessage));
+      }
+
+      /**
+       * Observer when the message changed
+       * @param {String} message is the input message
+       */
       _messageChanged(message) {
-        this.set('valid', false);
         this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
-          Polymer.Async.timeOut.after(250), () => this._validate(message));
+          Polymer.Async.timeOut.after(250), () => this._validate(message)
+        );
       }
 
+      /**
+       * Send the input message by dispatching the send-message event
+       */
       _sendMessage() {
-        if (!this.$.messageInput.invalid) {
+        if (!this._error) {
           var sendMessageEvent = new CustomEvent('send-message', {
             detail: {
               message: this.message,
@@ -152,6 +180,9 @@ If not, the component will notify user by the error message.
         }
       }
 
+      /**
+       * Add form event listener and validate message for the first time
+       */
       connectedCallback() {
         super.connectedCallback();
 
@@ -161,6 +192,19 @@ If not, the component will notify user by the error message.
         });
       }
 
+      /**
+       * Validate message for the first time
+       */
+      ready() {
+        super.ready();
+        this._validate(this.message);
+      }
+
+      /**
+       * Return whether the message can be splitted or not
+       * @param {String} message - the input message
+       * @return {Boolean}
+       */
       _canSplitMessage(message) {
         return Boolean(this.$.helper.splitMessage(message));
       }
