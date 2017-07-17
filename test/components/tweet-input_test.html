@@ -36,9 +36,8 @@
                 return true;
               });
 
-              assert.deepEqual(
-                element._computeErrorWhenValidate('', ''), new Error()
-              );
+              expect(element._computeErrorWhenValidate('', '') instanceof Error)
+                .to.be.true;
             });
 
           test(
@@ -48,12 +47,11 @@
                 return false;
               });
 
-              assert.deepEqual(
-                element._computeErrorWhenValidate('message',
-                  'error-message'
-                ),
-                new Error('error-message')
+              var error = element._computeErrorWhenValidate('message',
+                'error-message'
               );
+
+              expect(error instanceof Error).to.be.true;
             });
 
           test(
@@ -107,21 +105,17 @@
         });
 
         suite('_messageChanged', function() {
-          test('should add event listener to form', function() {
+          test('should been called when form submit', function() {
             sinon.spy(element, '_sendMessage');
-            element.$.form.dispatchEvent(new CustomEvent('submit'));
-            expect(element._sendMessage).to.have.been.called;
+            element._messageChanged('abc');
           });
         });
 
         suite('connectedCallback', function() {
-          test('should add event listener to form', function(done) {
-            sinon.spy(element, '_validate');
-            element._messageChanged('abc');
-            setTimeout(function() {
-              expect(element._validate).to.have.been.called;
-              done();
-            }, 500);
+          test('should add event listener to form', function() {
+            sinon.spy(element, '_sendMessage');
+            element.$.form.dispatchEvent(new CustomEvent('submit'));
+            expect(element._sendMessage).to.have.been.called;
           });
         });
       });
