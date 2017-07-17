@@ -1,0 +1,5 @@
+<!DOCTYPE html><html><head><title>iron-meta-basic</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <script>if (!window.customElements) { document.write('<!--'); }</script>
+    <script type="text/javascript" src="../../webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <!--! do not remove -->
+<script src="../../webcomponentsjs/webcomponents-lite.js"></script><script src="../../web-component-tester/browser.js"></script><link rel="import" href="../iron-meta.html"></head><body><iron-meta key="info" value="foo/bar"></iron-meta><script>suite('basic',function(){test('byKey',function(){var a=new Polymer.IronMeta({key:'info'});expect(a.value).to.be.eql('foo/bar')}),test('list',function(){assert.equal(document.querySelector('iron-meta').list.length,1)})});</script></body></html>

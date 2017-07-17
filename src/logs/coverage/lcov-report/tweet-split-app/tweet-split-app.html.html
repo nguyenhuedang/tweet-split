@@ -1,0 +1,335 @@
+<!DOCTYPE html><html lang="en"><head>
+    <title>Code coverage report for tweet-split-app/tweet-split-app.html</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../prettify.css">
+    <link rel="stylesheet" href="../base.css">
+    <style type="text/css">
+        div.coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">tweet-split-app/tweet-split-app.html</span></h1>
+    <h2>
+        Statements: <span class="metric">100% <small>(8 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(0 / 0)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(5 / 5)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(8 / 8)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> » <a href="index.html">tweet-split-app/</a> » tweet-split-app.html</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;link rel="import" href="../../bower_components/polymer/polymer-element.html"&gt;
+&lt;link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html"&gt;
+&lt;link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html"&gt;
+&nbsp;
+&lt;link rel="import" href="../lib/tweet-split-helper.html"&gt;
+&nbsp;
+&lt;link rel="import" href="../components/tweet-list.html"&gt;
+&lt;link rel="import" href="../components/tweet-input.html"&gt;
+&lt;link rel="import" href="../components/tweet-shared-styles.html"&gt;
+&nbsp;
+&lt;!--
+`&lt;tweet-split-app&gt;` is the app shell of TweetSplit. There are 3 main parts in the app:
+1. The &lt;tweet-input&gt; to enter the message and validate message.
+2. The &lt;tweet-split-helper&gt; to split message - main business logics of the app.
+3. The &lt;tweet-list&gt; that contains lists of &lt;tweet-item&gt;, the display of sent tweets
+&nbsp;
+@customElement
+@polymer
+@demo demo/tweet-split-app/tweet-split-app_demo.html
+--&gt;
+&lt;dom-module id="tweet-split-app"&gt;
+  &lt;template&gt;
+    &lt;custom-style&gt;
+      &lt;style is="custom-style" include="tweet-shared-styles"&gt;&lt;/style&gt;
+    &lt;/custom-style&gt;
+&nbsp;
+    &lt;style&gt;
+       :host {
+        display: block;
+        --primary-color: #1da1f2;
+        /* font-family: monospace; */
+        font-family: sans-serif;
+        max-width: 440px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        min-height: 100%;
+      }
+&nbsp;
+      vaadin-checkbox {
+        padding: 10px 0;
+      }
+&nbsp;
+    &lt;/style&gt;
+&nbsp;
+    &lt;tweet-input id="input"&gt;&lt;/tweet-input&gt;
+    &lt;iron-localstorage name="tweets" value="{{tweets}}" on-iron-localstorage-load-empty="_initTweets"&gt;&lt;/iron-localstorage&gt;
+    &lt;iron-localstorage name="verbose" value="{{verbose}}"&gt;&lt;/iron-localstorage&gt;
+    &lt;vaadin-checkbox checked="{{verbose}}"&gt;Display verbose information&lt;/vaadin-checkbox&gt;
+&nbsp;
+    &lt;tweet-list tweets="[[tweets]]" verbose="[[verbose]]"&gt;&lt;/tweet-list&gt;
+    &lt;tweet-split-helper id="helper"&gt;&lt;/tweet-split-helper&gt;
+  &lt;/template&gt;
+&nbsp;
+  &lt;script&gt;
+    class TweetSplitApp extends Polymer.Element {
+      static get is() {
+        return 'tweet-split-app';
+      }
+&nbsp;
+      static get properties() {
+        return {
+          /**
+           * The tweets that will be saved in browser's localStorage
+           */
+          tweets: {
+            type: Array,
+          },
+&nbsp;
+          /**
+           * The verbose switch to display more infomration for debugging
+           */
+          verbose: Boolean,
+        };
+      }
+&nbsp;
+      _initTweets() {
+        this.set('tweets', []);
+      }
+&nbsp;
+      _handleSendMessage(event) {
+        this.unshift('tweets', {
+          parts: this.$.helper.splitMessage(event.detail.message),
+        });
+      }
+&nbsp;
+      connectedCallback() {
+        super.connectedCallback();
+        this.$.input.addEventListener('send-message',
+          (e) =&gt; this._handleSendMessage(e));
+      }
+    }
+&nbsp;
+    window.customElements.define(TweetSplitApp.is, TweetSplitApp);
+&nbsp;
+  &lt;/script&gt;
+&lt;/dom-module&gt;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jul 17 2017 11:49:28 GMT+0000 (UTC)</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+
+
+</body></html>

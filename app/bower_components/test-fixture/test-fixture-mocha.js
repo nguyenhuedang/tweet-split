@@ -1,0 +1,1 @@
+(function(a){Object.keys(a.interfaces).forEach(function(c){var d=a.interfaces[c],e='bdd'===c?'afterEach':'teardown';a.interfaces[c]=function(f){d.apply(this,arguments),f.on('pre-require',function(g){g[e]&&(g.fixture=function(j,k){return g[e](function(){document.getElementById(j).restore()}),document.getElementById(j).create(k)})})}})})(this.Mocha);

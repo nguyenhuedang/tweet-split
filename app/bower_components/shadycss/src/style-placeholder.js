@@ -1,0 +1,1 @@
+'use strict';import{applyStylePlaceHolder}from'./style-util.js';import{nativeShadow}from'./style-settings.js';var placeholderMap={},ce=window.customElements;if(ce&&!nativeShadow){var origDefine=ce.define,wrappedDefine=function(b,c,d){return placeholderMap[b]=applyStylePlaceHolder(b),origDefine.call(ce,b,c,d)};ce.define=wrappedDefine}export default placeholderMap;

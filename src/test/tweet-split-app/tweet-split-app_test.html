@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>tweet-split-app test</title>
+
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../src/tweet-split-app/tweet-split-app.html">
+  </head>
+
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <tweet-split-app></tweet-split-app>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('Unit test', function() {
+        suite('_initTweets', function() {
+          test('should set the tweets to empty when execute',
+            function() {
+              var element = fixture('BasicTestFixture');
+              element._initTweets();
+              expect(element.tweets).to.be.empty;
+            });
+        });
+
+        suite('_handleSendMessage', function() {
+          test(
+            'should unshift the message to tweets',
+            function() {
+              var element = fixture('BasicTestFixture');
+              var sendMessageEvent = new CustomEvent('send-message', {
+                detail: {
+                  message: 'Hello world',
+                },
+              });
+
+              element._initTweets();
+              element._handleSendMessage(sendMessageEvent);
+              assert.deepEqual(element.tweets[0], {
+                parts: ['Hello world'],
+              });
+            });
+        });
+
+        suite('connectedCallback', function() {
+          var element;
+          var elementInput;
+          var sendMessageEvent;
+
+          setup(function() {
+            element = fixture('BasicTestFixture');
+            elementInput = element.shadowRoot.getElementById(
+              'input');
+            sendMessageEvent = new CustomEvent('send-message', {
+              detail: {
+                message: 'Hello world',
+              },
+            });
+          });
+
+          test(
+            'should add event listener send-message to method _handleSendMessage',
+            function() {
+              sinon.stub(element, '_handleSendMessage', function() {});
+              elementInput.dispatchEvent(sendMessageEvent);
+              expect(element._handleSendMessage)
+                .to.have.been.calledWith(sendMessageEvent);
+            });
+        });
+      });
+
+    </script>
+
+
+  
+
+
+</body></html>

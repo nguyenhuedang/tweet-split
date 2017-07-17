@@ -1,0 +1,5 @@
+<!DOCTYPE html><html><head><title>paper-radio-button-behavior</title>
+    <script>if (!window.customElements) { document.write('<!--'); }</script>
+    <script type="text/javascript" src="../../webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <!--! do not remove -->
+<script src="../../webcomponentsjs/webcomponents-lite.js"></script><script src="../../web-component-tester/browser.js"></script><script src="../../test-fixture/test-fixture-mocha.js"></script><script src="../../iron-test-helpers/mock-interactions.js"></script><link rel="import" href="../../polymer/polymer.html"><link rel="import" href="../../test-fixture/test-fixture.html"><link rel="import" href="test-radio-button.html"></head><body><test-fixture id="basic"><template><test-radio-button></test-radio-button></template></test-fixture><script>suite('basic',function(){var a;setup(function(){a=fixture('basic'),MockInteractions.blur(a)}),test('normal (no states)',function(){assert.isFalse(a.focused),assert.isFalse(a.hasRipple())}),test('receives focus',function(){MockInteractions.focus(a),assert.isTrue(a.focused),assert.isTrue(a.hasRipple())})});</script></body></html>

@@ -1,0 +1,59 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../components/tweet-item.html">
+
+<!--
+`<tweet-list>` is a list of tweet-item
+    
+    <tweet-list></tweet-list>
+
+It may include a character counter for debugging.
+  
+    <tweet-list verbose></tweet-list>
+
+@customElement
+@polymer
+@demo demo/components/tweet-list_demo.html
+-->
+<dom-module id="tweet-list">
+  <template>
+    <style>
+       :host {
+        display: block;
+      }
+
+    </style>
+
+    <dom-repeat items="[[tweets]]" as="tweet">
+      <template>
+        <tweet-item verbose="[[verbose]]" tweet="[[tweet]]"></tweet-item>
+      </template>
+    </dom-repeat>
+  </template>
+
+  <script>
+    class TweetList extends Polymer.Element {
+      static get is() {
+        return 'tweet-list';
+      }
+
+      static get properties() {
+        return {
+          /**
+           * List of tweets
+           */
+          tweets: {
+            type: Array,
+          },
+          /**
+           * Will pass to tweet-item to render debugging information
+           */
+          verbose: Boolean,
+        };
+      }
+    }
+
+    window.customElements.define(TweetList.is, TweetList);
+
+  </script>
+</dom-module>

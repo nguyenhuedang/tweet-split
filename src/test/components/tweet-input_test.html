@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>tweet-input test</title>
+
+    <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../bower_components/web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../../src/components/tweet-input.html">
+  </head>
+
+  <body>
+
+    <test-fixture id="BasicTestFixture">
+      <template>
+        <tweet-input></tweet-input>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('Unit test', function() {
+        var element;
+
+        setup(function() {
+          element = fixture('BasicTestFixture');
+        });
+
+        suite('_computeErrorWhenValidate', function() {
+          test('should return an Error instance when message is empty',
+            function() {
+              sinon.stub(element, '_canSplitMessage', function() {
+                return true;
+              });
+
+              expect(element._computeErrorWhenValidate('', '') instanceof Error)
+                .to.be.true;
+            });
+
+          test(
+            'should return an Error with message when splitting is impossible',
+            function() {
+              sinon.stub(element, '_canSplitMessage', function() {
+                return false;
+              });
+
+              var error = element._computeErrorWhenValidate('message',
+                'error-message'
+              );
+
+              expect(error instanceof Error).to.be.true;
+              expect(error.message).to.be.equal('error-message');
+            });
+
+          test(
+            'should return null when message is valid',
+            function() {
+              var element = fixture('BasicTestFixture');
+              sinon.stub(element, '_canSplitMessage', function() {
+                return true;
+              });
+              expect(element._computeErrorWhenValidate('message',
+                  'error-message'))
+                .to.be.null;
+            });
+        });
+
+        suite('_sendMessage', function() {
+          test(
+            'if no error, should dispatch event send-message when executed',
+            function() {
+              sinon.spy(element, 'dispatchEvent');
+              element._error = null;
+              element._sendMessage();
+              expect(element.dispatchEvent).to.have.been.called;
+            });
+
+          test(
+            'if error,should not dispatch event send-message',
+            function() {
+              sinon.spy(element, 'dispatchEvent');
+              element._error = new Error();
+              element._sendMessage();
+              expect(element.dispatchEvent).to.have.not.been.called;
+            });
+        });
+
+        suite('_canSplitMessage', function() {
+          test('should return true when splitMessage success', function() {
+            sinon.stub(element.$.helper, 'splitMessage', function() {
+              return ['abc'];
+            });
+            expect(element._canSplitMessage('abc')).to.be.true;
+          });
+
+          test('should return false when splitMessage failed',
+            function() {
+              sinon.stub(element.$.helper, 'splitMessage', function() {
+                return null;
+              });
+              expect(element._canSplitMessage('abc')).to.be.false;
+            });
+        });
+
+        suite('_messageChanged', function() {
+          test('should trigger validate after 250ms', function(done) {
+            sinon.spy(element, '_validate');
+            element._messageChanged('abc');
+            setTimeout(function() {
+              expect(element._validate).has.been.called;
+              done();
+            }, 500);
+          });
+        });
+
+        suite('connectedCallback', function() {
+          test('should add event listener to form', function() {
+            sinon.spy(element, '_sendMessage');
+            element.$.form.dispatchEvent(new CustomEvent('submit'));
+            expect(element._sendMessage).to.have.been.called;
+          });
+        });
+      });
+
+    </script>
+
+
+  
+
+
+</body></html>

@@ -1,0 +1,234 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+<link rel="import" href="../../bower_components/polymer/lib/utils/debounce.html">
+
+<link rel="import" href="../lib/tweet-split-helper.html">
+<link rel="import" href="../components/tweet-shared-styles.html">
+
+<!--
+`<tweet-input>` consists of a text area field to let user enter the tweet message and a button to send it
+
+It validates with real-time the tweet message, whether it can be splitted or not.
+If not, the component will notify user by the error message.
+
+@customElement
+@polymer
+@demo demo/components/tweet-input_demo.html
+-->
+<dom-module id="tweet-input">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="tweet-shared-styles"></style>
+    </custom-style>
+
+    <style>
+       :host {
+        display: block;
+        background: var(--paper-blue-300);
+        padding-bottom: 12px;
+      }
+
+      #submitButton {
+        margin-left: 10px;
+        background: var(--primary-color);
+        border: none;
+        color: white;
+        font-size: 14px;
+        padding: 10px 30px;
+        border-radius: 20px;
+        width: 108px;
+      }
+
+      #submitButton[disabled] {
+        opacity: 0.5;
+      }
+
+      iron-autogrow-textarea {
+        border: none;
+        width: 100%;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+        overflow: visible;
+
+        --iron-autogrow-textarea: {
+          border: 2px solid var(--primary-color);
+          border-radius: 5px;
+          padding: 20px;
+          box-sizing: border-box;
+        }
+      }
+
+      @media(max-width: 500px) {
+        iron-autogrow-textarea {
+          --iron-autogrow-textarea: {
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 16px;
+          }
+        }
+      }
+
+      form {
+        padding: 0;
+        margin: 0;
+      }
+
+      .error-message {
+        color: #db4437;
+        font-size: 90%;
+      }
+
+    </style>
+
+    <tweet-split-helper id="helper"></tweet-split-helper>
+
+    <form id="form" class="layout vertical">
+      <iron-autogrow-textarea rows="5" id="messageInput" bind-value="{{message}}" auto-validate="">
+      </iron-autogrow-textarea>
+      <div class="layout horizontal end">
+        <div class="error-message flex-auto self-start">[[_error.message]]</div>
+        <button id="submitButton" class="flex-none" type="submit" disabled$="[[_error]]">Tweet</button>
+      </div>
+    </form>
+  </template>
+
+  <script>
+    class TweetInput extends Polymer.Element {
+      static get is() {
+        return 'tweet-input';
+      }
+
+      static get properties() {
+        return {
+          /**
+           * The message input by user
+           */
+          message: {
+            type: String,
+            observer: '_messageChanged',
+            value: '',
+          },
+
+          /**
+           * Whether the input is valid or not
+           */
+          valid: {
+            type: Boolean,
+            value: false,
+          },
+
+          /**
+           * Will be null if the input is valid, an Error instance otherwise
+           */
+          _error: {
+            type: Error,
+            value: new Error(),
+          },
+
+          /**
+           * Customize the error message when the string can not be splitted
+           */
+          splitErrorMessage: {
+            type: String,
+            value: 'We can\'t send your tweet because it\'s unbreakable.',
+          },
+        };
+      }
+
+      /**
+       * Return the Error instance if validation failed, or null otherwise
+       * @param {String} message is the message to validate
+       * @param {String} splitErrorMessage - the spliting Error message
+       * @return {Error}
+       * @return {null}
+       */
+      _computeErrorWhenValidate(message, splitErrorMessage) {
+        if (!message) {
+          return new Error();
+        }
+
+        if (!this._canSplitMessage(message)) {
+          return new Error(splitErrorMessage);
+        }
+
+        return null;
+      }
+
+      /**
+       * Set the error value
+       * @param {String} message is the input message
+       */
+      _validate(message) {
+        this.set('_error',
+          this._computeErrorWhenValidate(message, this.splitErrorMessage)
+        );
+      }
+
+      /**
+       * Observer when the message changed
+       * @param {String} message is the input message
+       */
+      _messageChanged(message) {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
+          Polymer.Async.timeOut.after(250), () => this._validate(message)
+        );
+      }
+
+      /**
+       * Send the input message by dispatching the send-message event
+       */
+      _sendMessage() {
+        if (!this._error) {
+          var sendMessageEvent = new CustomEvent('send-message', {
+            detail: {
+              message: this.message,
+            },
+          });
+          this.dispatchEvent(sendMessageEvent);
+          this.set('message', '');
+        }
+      }
+
+      /**
+       * Add form event listener and validate message for the first time
+       */
+      connectedCallback() {
+        super.connectedCallback();
+
+        this.$.form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          this._sendMessage();
+        });
+      }
+
+      /**
+       * Validate message for the first time
+       */
+      ready() {
+        super.ready();
+        this._validate(this.message);
+      }
+
+      /**
+       * Return whether the message can be splitted or not
+       * @param {String} message - the input message
+       * @return {Boolean}
+       */
+      _canSplitMessage(message) {
+        return Boolean(this.$.helper.splitMessage(message));
+      }
+
+      /**
+      Fired when user tap the Tweet button
+      @event send-message
+      Event param: {{message: String}} detail Contains the sending message
+      */
+    }
+
+    window.customElements.define(TweetInput.is, TweetInput);
+
+  </script>
+</dom-module>

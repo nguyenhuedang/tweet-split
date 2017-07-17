@@ -1,0 +1,49 @@
+{
+  "entrypoint": "index.html",
+  "fragments": [],
+  "sources": [
+    "demo/**",
+    "docs.html",
+    "bower_components/**/*",
+    "analysis.json",
+    "test/**/*",
+    "index.html"
+  ],
+  "extraDependencies": [
+    "logs/**/*",
+    "bower_components/webcomponentsjs/*.js"
+  ],
+  "builds": [
+    {
+      "name": "app",
+      "js": {
+        "minify": true,
+        "compile": true
+      },
+      "css": {
+        "minify": true
+      },
+      "html": {
+        "minify": true
+      }
+    },
+    {
+      "name": "src",
+      "js": {
+        "minify": false,
+        "compile": false
+      },
+      "css": {
+        "minify": false
+      },
+      "html": {
+        "minify": false
+      }
+    }
+  ],
+  "lint": {
+    "rules": [
+      "polymer-2"
+    ]
+  }
+}

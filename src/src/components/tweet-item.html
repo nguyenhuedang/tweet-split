@@ -1,0 +1,98 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../components/tweet-shared-styles.html">
+
+<!--
+`<tweet-item>` is a single tweet text view for a tweet. The tweet input should be under format
+
+    {
+        parts: ['Content of part 1', 'Content of part 2', etc.]
+    }
+
+For example:
+
+    <tweet-item id="tweet"></tweet-item>
+
+    <script>
+      document.getElementById('tweet').tweet = {
+        parts: ['Hello World']
+      }
+    </script>
+
+It may include a character counter for debugging.
+  
+    <tweet-item verbose></tweet-item>
+
+@customElement
+@polymer
+@demo demo/components/tweet-item_demo.html
+-->
+<dom-module id="tweet-item">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="tweet-shared-styles"></style>
+    </custom-style>
+
+    <style>
+       :host {
+        display: block;
+        background: #F4FAFE;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+      }
+
+      .counter {
+        color: #999;
+        font-size: 80%;
+      }
+
+      .part {
+        margin: 8px 0;
+        font-size: 14px;
+      }
+
+
+      @media(max-width: 500px) {
+        .part {
+          font-size: 10px;
+        }
+      }
+
+    </style>
+
+    <dom-repeat items="[[tweet.parts]]" as="part">
+      <template>
+        <div class="part layout horizontal center">
+          <div class="flex-auto">[[part]]</div>
+          <div hidden="" hidden$="[[!verbose]]" class="counter flex-none">[[part.length]]</div>
+        </div>
+      </template>
+    </dom-repeat>
+  </template>
+
+  <script>
+    class TweetItem extends Polymer.Element {
+      static get is() {
+        return 'tweet-item';
+      }
+
+      static get properties() {
+        return {
+          /**
+           * The tweet to display
+           */
+          tweet: Object,
+
+          /**
+           * Whether to display to debugging information or not
+           */
+          verbose: Boolean,
+        };
+      }
+    }
+
+    window.customElements.define(TweetItem.is, TweetItem);
+
+  </script>
+</dom-module>

@@ -1,0 +1,97 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-localstorage/iron-localstorage.html">
+<link rel="import" href="../../bower_components/vaadin-checkbox/vaadin-checkbox.html">
+
+<link rel="import" href="../lib/tweet-split-helper.html">
+
+<link rel="import" href="../components/tweet-list.html">
+<link rel="import" href="../components/tweet-input.html">
+<link rel="import" href="../components/tweet-shared-styles.html">
+
+<!--
+`<tweet-split-app>` is the app shell of TweetSplit. There are 3 main parts in the app:
+1. The <tweet-input> to enter the message and validate message.
+2. The <tweet-split-helper> to split message - main business logics of the app.
+3. The <tweet-list> that contains lists of <tweet-item>, the display of sent tweets
+
+@customElement
+@polymer
+@demo demo/tweet-split-app/tweet-split-app_demo.html
+-->
+<dom-module id="tweet-split-app">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="tweet-shared-styles"></style>
+    </custom-style>
+
+    <style>
+       :host {
+        display: block;
+        --primary-color: #1da1f2;
+        /* font-family: monospace; */
+        font-family: sans-serif;
+        max-width: 440px;
+        margin: auto;
+        padding: 20px;
+        background: white;
+        min-height: 100%;
+      }
+
+      vaadin-checkbox {
+        padding: 10px 0;
+      }
+
+    </style>
+
+    <tweet-input id="input"></tweet-input>
+    <iron-localstorage name="tweets" value="{{tweets}}" on-iron-localstorage-load-empty="_initTweets"></iron-localstorage>
+    <iron-localstorage name="verbose" value="{{verbose}}"></iron-localstorage>
+    <vaadin-checkbox checked="{{verbose}}">Display verbose information</vaadin-checkbox>
+
+    <tweet-list tweets="[[tweets]]" verbose="[[verbose]]"></tweet-list>
+    <tweet-split-helper id="helper"></tweet-split-helper>
+  </template>
+
+  <script>
+    class TweetSplitApp extends Polymer.Element {
+      static get is() {
+        return 'tweet-split-app';
+      }
+
+      static get properties() {
+        return {
+          /**
+           * The tweets that will be saved in browser's localStorage
+           */
+          tweets: {
+            type: Array,
+          },
+
+          /**
+           * The verbose switch to display more infomration for debugging
+           */
+          verbose: Boolean,
+        };
+      }
+
+      _initTweets() {
+        this.set('tweets', []);
+      }
+
+      _handleSendMessage(event) {
+        this.unshift('tweets', {
+          parts: this.$.helper.splitMessage(event.detail.message),
+        });
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this.$.input.addEventListener('send-message',
+          (e) => this._handleSendMessage(e));
+      }
+    }
+
+    window.customElements.define(TweetSplitApp.is, TweetSplitApp);
+
+  </script>
+</dom-module>

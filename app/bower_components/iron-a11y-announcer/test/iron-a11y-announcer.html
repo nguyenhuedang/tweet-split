@@ -1,0 +1,5 @@
+<!DOCTYPE html><html><head><title>iron-a11y-announcer</title>
+    <script>if (!window.customElements) { document.write('<!--'); }</script>
+    <script type="text/javascript" src="../../webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <!--! do not remove -->
+<script src="../../webcomponentsjs/webcomponents-lite.js"></script><script src="../../web-component-tester/browser.js"></script><link rel="import" href="../../polymer/polymer.html"><link rel="import" href="../iron-a11y-announcer.html"></head><body><test-fixture id="Announcer"><template><iron-a11y-announcer></iron-a11y-announcer></template></test-fixture><script>suite('<iron-a11y-announcer>',function(){var a;setup(function(){a=fixture('Announcer')}),test('announces when there is an iron-announce event',function(){var b=new CustomEvent('iron-announce',{bubbles:!0,detail:{text:'foo'}});sinon.spy(a,'announce'),document.body.dispatchEvent(b),expect(a.announce.callCount).to.be.equal(1)})});</script></body></html>

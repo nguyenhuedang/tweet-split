@@ -1,0 +1,1 @@
+var gulp=require('gulp'),uglify=require('gulp-uglify'),concat=require('gulp-concat'),preserveFirstComment=function(){var b=!1;return function(){return!b&&(b=!0,!0)}};gulp.task('uglify',function(){gulp.src('lib/marked.js').pipe(uglify({preserveComments:preserveFirstComment()})).pipe(concat('marked.min.js')).pipe(gulp.dest('.'))}),gulp.task('default',['uglify']);

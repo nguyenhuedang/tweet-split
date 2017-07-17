@@ -1,0 +1,79 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>tweet-item demo</title>
+
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+  <link rel="import" href="../../bower_components/polymer/lib/elements/dom-bind.html">
+  <link rel="import" href="../../src/components/tweet-item.html">
+
+
+  </head><custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      iron-autogrow-textarea {
+        font-family: monospace;
+      }
+    </style>
+  </custom-style>
+
+
+
+  <div class="vertical-section-container centered">
+    <h3>A basis tweet</h3>
+    <demo-snippet>
+      <template>
+        <tweet-item id="basisTweetItem"></tweet-item>
+      </template>
+    </demo-snippet>
+
+    <h3>Debugging the tweet with verbose information</h3>
+    <demo-snippet>
+      <template>
+        <tweet-item verbose="" id="verboseTweetItem"></tweet-item>
+      </template>
+    </demo-snippet>
+
+    <h3>Real-time: modify the input for tweet-item below</h3>
+    <demo-snippet>
+      <template>
+        <dom-bind>
+          <template>
+            <iron-autogrow-textarea id="tweetInput" rows="3" bind-value="{{tweet}}"></iron-autogrow-textarea>
+            <tweet-item verbose="" id="liveTweetItem"></tweet-item>
+          </template>
+        </dom-bind>
+      </template>
+    </demo-snippet>
+
+    <script>
+      document.getElementById('basisTweetItem').tweet = {
+        parts: ['Hello World!']
+      }
+
+      document.getElementById('verboseTweetItem').tweet = {
+        parts: ['Hi, did you see my characters counter next to me?']
+      }
+
+      var realTimeInput = document.getElementById('tweetInput');
+      var realTimeTweetItem = document.getElementById('liveTweetItem');
+      realTimeInput.addEventListener('bind-value-changed', event => {
+        try {
+          realTimeTweetItem.tweet = JSON.parse(event.detail.value);
+          realTimeInput.style.background = '';
+        } catch (error) {
+          realTimeInput.style.background = '#f4c7c3';
+        }
+      });
+
+      realTimeInput.value =
+        '{\n  "parts": [\n    "I am the first part of the tweet",\n    "I am the second one"\n  ]\n}'
+    </script>
+
+
+</div></html>

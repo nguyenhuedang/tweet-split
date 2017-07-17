@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<assemblies>
+  <assembly name="WCT Unit tests [chrome.59]" environment="chrome.59" test-framework="web-component-tester" run-date="2017-07-17" run-time="11:49:37" total="20" passed="20" failed="0" skipped="0">
+    <collection passed="9" failed="0" skipped="0">
+      <test name="should return an Error instance when message is empty" method="Unit test._computeErrorWhenValidate.should return an Error instance when message is empty" type="test/components/tweet-input_test.html" result="Pass" time="2"/>
+      <test name="should return an Error with message when splitting is impossible" method="Unit test._computeErrorWhenValidate.should return an Error with message when splitting is impossible" type="test/components/tweet-input_test.html" result="Pass" time="1"/>
+      <test name="should return null when message is valid" method="Unit test._computeErrorWhenValidate.should return null when message is valid" type="test/components/tweet-input_test.html" result="Pass" time="4"/>
+      <test name="if no error, should dispatch event send-message when executed" method="Unit test._sendMessage.if no error, should dispatch event send-message when executed" type="test/components/tweet-input_test.html" result="Pass" time="1"/>
+      <test name="if error,should not dispatch event send-message" method="Unit test._sendMessage.if error,should not dispatch event send-message" type="test/components/tweet-input_test.html" result="Pass" time="1"/>
+      <test name="should return true when splitMessage success" method="Unit test._canSplitMessage.should return true when splitMessage success" type="test/components/tweet-input_test.html" result="Pass" time="0"/>
+      <test name="should return false when splitMessage failed" method="Unit test._canSplitMessage.should return false when splitMessage failed" type="test/components/tweet-input_test.html" result="Pass" time="0"/>
+      <test name="should trigger validate after 250ms" method="Unit test._messageChanged.should trigger validate after 250ms" type="test/components/tweet-input_test.html" result="Pass" time="502"/>
+      <test name="should add event listener to form" method="Unit test.connectedCallback.should add event listener to form" type="test/components/tweet-input_test.html" result="Pass" time="1"/>
+    </collection>
+    <collection passed="17" failed="0" skipped="0">
+      <test name="A valid message with length 3" method="TweetSplitHelper.splitMessage.A valid message with length 3" type="test/lib/tweet-split-helper_test.html" result="Pass" time="0"/>
+      <test name="A valid message with length 50" method="TweetSplitHelper.splitMessage.A valid message with length 50" type="test/lib/tweet-split-helper_test.html" result="Pass" time="0"/>
+      <test name="A valid message with length 91" method="TweetSplitHelper.splitMessage.A valid message with length 91" type="test/lib/tweet-split-helper_test.html" result="Pass" time="1"/>
+      <test name="A valid message with length 1103" method="TweetSplitHelper.splitMessage.A valid message with length 1103" type="test/lib/tweet-split-helper_test.html" result="Pass" time="0"/>
+      <test name="A valid message with length 4415" method="TweetSplitHelper.splitMessage.A valid message with length 4415" type="test/lib/tweet-split-helper_test.html" result="Pass" time="1"/>
+      <test name="An invalid message with length 0" method="TweetSplitHelper.splitMessage.An invalid message with length 0" type="test/lib/tweet-split-helper_test.html" result="Pass" time="0"/>
+      <test name="An invalid message with length 92" method="TweetSplitHelper.splitMessage.An invalid message with length 92" type="test/lib/tweet-split-helper_test.html" result="Pass" time="1"/>
+      <test name="An invalid message with length 91" method="TweetSplitHelper.splitMessage.An invalid message with length 91" type="test/lib/tweet-split-helper_test.html" result="Pass" time="0"/>
+    </collection>
+    <collection passed="20" failed="0" skipped="0">
+      <test name="should set the tweets to empty when execute" method="Unit test._initTweets.should set the tweets to empty when execute" type="test/tweet-split-app/tweet-split-app_test.html" result="Pass" time="34"/>
+      <test name="should unshift the message to tweets" method="Unit test._handleSendMessage.should unshift the message to tweets" type="test/tweet-split-app/tweet-split-app_test.html" result="Pass" time="8"/>
+      <test name="should add event listener send-message to method _handleSendMessage" method="Unit test.connectedCallback.should add event listener send-message to method _handleSendMessage" type="test/tweet-split-app/tweet-split-app_test.html" result="Pass" time="2"/>
+    </collection>
+  </assembly>
+</assemblies>

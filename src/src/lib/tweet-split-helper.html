@@ -1,0 +1,175 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<!--
+`<tweet-split-helper>` contains main business logics of the app. There are 3 ways to use the helper:
+
+1. Define the helper element in the main HTML document
+```html
+<tweet-split-helper id="helper"></tweet-split-helper>
+<script>
+    document.getElementById('helper').splitMessage('The input message');
+</script>
+```
+
+2. Create element with `createElement`
+```javascript
+var helper = document.createElement('tweet-split-helper');
+helper.splitMessage('The input message');
+```
+
+3. Using constructor
+```javascript
+var helper = new TweetSplitHelper();
+helper.splitMessage('The input message');
+```
+
+
+@customElement
+@polymer
+@demo demo/lib/tweet-split-helper_demo.html
+-->
+<dom-module id="tweet-split-helper">
+  <script>
+    class TweetSplitHelper extends HTMLElement {
+      static get is() {
+        return 'tweet-split-helper';
+      }
+
+      constructor() {
+        super();
+        this.PART_MAX_LENGTH = 50;
+      }
+
+      /**
+       * Return the length of indicator (e.g. 12/102)
+       * @param {Number} lengthOfCurrentIndex - the length of current index
+       * @param {Number} lengthOfTotalPartNumber - the length of total number
+       * @return {Number}
+       */
+      _getIndicatorLength(lengthOfCurrentIndex, lengthOfTotalPartNumber) {
+        return lengthOfCurrentIndex + lengthOfTotalPartNumber + 2;
+      }
+
+      /**
+       * Return the counting of numbers having same length
+       * @param {Number} length - the length of number (i.e. how many digits)
+       * @return {Number}
+       */
+      _countNumbersHavingLength(length) {
+        return Math.pow(10, length) - Math.pow(10, length - 1);
+      }
+
+      /**
+       * Return the pattern to split, giving the indicator information.
+       * The pattern group is to split the message into one group message
+       * and the rest of message.
+       * The pattern part is to split a group message into every single part,
+       * having the same length.
+       * @param {Number} lengthOfCurrentIndex - the length of current index
+       * @param {Number} lengthOfTotalPartNumber - the length of total index
+       * @return {Object}
+       */
+      _getSplittingPattern(lengthOfCurrentIndex, lengthOfTotalPartNumber) {
+        var messageMaxLength = this.PART_MAX_LENGTH -
+          this._getIndicatorLength(lengthOfCurrentIndex,
+            lengthOfTotalPartNumber);
+        var partRegexString = `(.{1,${messageMaxLength}})(?:\\s|\\n|$)+`;
+        var partMaxCount = this._countNumbersHavingLength(
+          lengthOfCurrentIndex);
+        var partLoop = '1,' + partMaxCount;
+
+        return {
+          'part': new RegExp(partRegexString),
+          'group': new RegExp(`^((?:${partRegexString}){${partLoop}})`),
+        };
+      }
+
+      /**
+       * Attemp to split message given the length of total part number,
+       * i.e. that total part number < 10^(lengthOfTotalPartNumber).
+       * Either return the splitted parts, or throw the error if the message
+       * can not be splitted
+       * @param {Number} lengthOfTotalPartNumber - the length of total part number
+       * @param {String} message - the input message
+       * @return {Array}
+       */
+      _attempToSplitMessage(lengthOfTotalPartNumber, message) {
+        if (this.PART_MAX_LENGTH * Math.pow(10, lengthOfTotalPartNumber - 3) >
+          message.length) {
+          throw new Error('The message can not be splited');
+        }
+
+        var totalLength = 0;
+        var processMessage = message;
+        var splittedParts = [];
+
+        for (var i = 1; i <= lengthOfTotalPartNumber; ++i) {
+          var pattern = this._getSplittingPattern(i, lengthOfTotalPartNumber);
+
+          var regexExecData = pattern.group.exec(processMessage);
+
+          if (!regexExecData) {
+            break;
+          }
+          var splittedGroup = regexExecData[0];
+          processMessage = processMessage.slice(splittedGroup.length);
+
+          var parts = splittedGroup.split(pattern.part).filter((part) => part
+            .length > 0);
+
+          totalLength += splittedGroup.length;
+          splittedParts = splittedParts.concat(...parts);
+        }
+
+        if (totalLength < message.length) {
+          return this._attempToSplitMessage(lengthOfTotalPartNumber + 1,
+            message);
+        }
+
+        return splittedParts;
+      }
+
+      /**
+       * Return the indicator-prefix message
+       * @param {String} messagePart - the message of this part
+       * @param {Number} index - the index of message in the array
+       * @param {Array} array - all message parts
+       * @return {String}
+       */
+      _fillIndicator(messagePart, index, array) {
+        // var message = `${index + 1}/${array.length} ${messagePart}`.trim();
+        return `${index + 1}/${array.length} ${messagePart}`;
+      }
+
+      /**
+       * Either return the splitted parts with indicator-prefix,
+       * or an empty array of the message can not be splitted
+       * @param {String} message
+       * @return {Array}
+       */
+      splitMessage(message) {
+        if (!message) {
+          return null;
+        }
+
+        if (message.length <= this.PART_MAX_LENGTH) {
+          return [message];
+        }
+
+        var attempLengthOfTotalPartNumber = String(parseInt(message.length /
+          this.PART_MAX_LENGTH)).length;
+        try {
+          var messageParts = this._attempToSplitMessage(
+            attempLengthOfTotalPartNumber, message);
+          var fullParts = messageParts.map(this._fillIndicator);
+          return fullParts;
+        } catch (error) {
+          return null;
+        }
+      }
+    }
+
+    window.customElements.define(TweetSplitHelper.is, TweetSplitHelper);
+
+  </script>
+</dom-module>

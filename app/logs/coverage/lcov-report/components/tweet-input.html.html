@@ -1,0 +1,705 @@
+<!DOCTYPE html><html lang="en"><head><title>Code coverage report for components/tweet-input.html</title><meta charset="utf-8"><link rel="stylesheet" href="../prettify.css"><link rel="stylesheet" href="../base.css"><style type="text/css">div.coverage-summary .sorter{background-image:url(../sort-arrow-sprite.png);}</style></head><body><div class="header high"><h1>Code coverage report for <span class="entity">components/tweet-input.html</span></h1><h2>Statements: <span class="metric">100% <small>(22 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp; Branches: <span class="metric">100% <small>(6 / 6)</small></span> &nbsp;&nbsp;&nbsp;&nbsp; Functions: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp; Lines: <span class="metric">100% <small>(22 / 22)</small></span> &nbsp;&nbsp;&nbsp;&nbsp; Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;</h2><div class="path"><a href="../index.html">All files</a> » <a href="index.html">components/</a> » tweet-input.html</div></div><div class="body"><pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">25</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;link rel="import" href="../../bower_components/polymer/polymer-element.html"&gt;
+&lt;link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html"&gt;
+&lt;link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html"&gt;
+&lt;link rel="import" href="../../bower_components/polymer/lib/utils/debounce.html"&gt;
+&nbsp;
+&lt;link rel="import" href="../lib/tweet-split-helper.html"&gt;
+&lt;link rel="import" href="../components/tweet-shared-styles.html"&gt;
+&nbsp;
+&lt;!--
+`&lt;tweet-input&gt;` consists of a text area field to let user enter the tweet message and a button to send it
+&nbsp;
+It validates with real-time the tweet message, whether it can be splitted or not.
+If not, the component will notify user by the error message.
+&nbsp;
+@customElement
+@polymer
+@demo demo/components/tweet-input_demo.html
+--&gt;
+&lt;dom-module id="tweet-input"&gt;
+  &lt;template&gt;
+    &lt;custom-style&gt;
+      &lt;style is="custom-style" include="tweet-shared-styles"&gt;&lt;/style&gt;
+    &lt;/custom-style&gt;
+&nbsp;
+    &lt;style&gt;
+       :host {
+        display: block;
+        background: var(--paper-blue-300);
+        padding-bottom: 12px;
+      }
+&nbsp;
+      #submitButton {
+        margin-left: 10px;
+        background: var(--primary-color);
+        border: none;
+        color: white;
+        font-size: 14px;
+        padding: 10px 30px;
+        border-radius: 20px;
+        width: 108px;
+      }
+&nbsp;
+      #submitButton[disabled] {
+        opacity: 0.5;
+      }
+&nbsp;
+      iron-autogrow-textarea {
+        border: none;
+        width: 100%;
+        margin-bottom: 12px;
+        box-sizing: border-box;
+        overflow: visible;
+&nbsp;
+        --iron-autogrow-textarea: {
+          border: 2px solid var(--primary-color);
+          border-radius: 5px;
+          padding: 20px;
+          box-sizing: border-box;
+        }
+      }
+&nbsp;
+      @media(max-width: 500px) {
+        iron-autogrow-textarea {
+          --iron-autogrow-textarea: {
+            border: 2px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 16px;
+          }
+        }
+      }
+&nbsp;
+      form {
+        padding: 0;
+        margin: 0;
+      }
+&nbsp;
+      .error-message {
+        color: #db4437;
+        font-size: 90%;
+      }
+&nbsp;
+    &lt;/style&gt;
+&nbsp;
+    &lt;tweet-split-helper id="helper"&gt;&lt;/tweet-split-helper&gt;
+&nbsp;
+    &lt;form id="form" class="layout vertical"&gt;
+      &lt;iron-autogrow-textarea rows="5" id="messageInput" bind-value="{{message}}" auto-validate&gt;
+      &lt;/iron-autogrow-textarea&gt;
+      &lt;div class="layout horizontal end"&gt;
+        &lt;div class="error-message flex-auto self-start"&gt;[[_error.message]]&lt;/div&gt;
+        &lt;button id="submitButton" class="flex-none" type="submit" disabled$="[[_error]]"&gt;Tweet&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/template&gt;
+&nbsp;
+  &lt;script&gt;
+    class TweetInput extends Polymer.Element {
+      static get is() {
+        return 'tweet-input';
+      }
+&nbsp;
+      static get properties() {
+        return {
+          /**
+           * The message input by user
+           */
+          message: {
+            type: String,
+            observer: '_messageChanged',
+            value: '',
+          },
+&nbsp;
+          /**
+           * Whether the input is valid or not
+           */
+          valid: {
+            type: Boolean,
+            value: false,
+          },
+&nbsp;
+          /**
+           * Will be null if the input is valid, an Error instance otherwise
+           */
+          _error: {
+            type: Error,
+            value: new Error(),
+          },
+&nbsp;
+          /**
+           * Customize the error message when the string can not be splitted
+           */
+          splitErrorMessage: {
+            type: String,
+            value: 'We can\'t send your tweet because it\'s unbreakable.',
+          },
+        };
+      }
+&nbsp;
+      /**
+       * Return the Error instance if validation failed, or null otherwise
+       * @param {String} message is the message to validate
+       * @param {String} splitErrorMessage - the spliting Error message
+       * @return {Error}
+       * @return {null}
+       */
+      _computeErrorWhenValidate(message, splitErrorMessage) {
+        if (!message) {
+          return new Error();
+        }
+&nbsp;
+        if (!this._canSplitMessage(message)) {
+          return new Error(splitErrorMessage);
+        }
+&nbsp;
+        return null;
+      }
+&nbsp;
+      /**
+       * Set the error value
+       * @param {String} message is the input message
+       */
+      _validate(message) {
+        this.set('_error',
+          this._computeErrorWhenValidate(message, this.splitErrorMessage)
+        );
+      }
+&nbsp;
+      /**
+       * Observer when the message changed
+       * @param {String} message is the input message
+       */
+      _messageChanged(message) {
+        this._debouncer = Polymer.Debouncer.debounce(this._debouncer,
+          Polymer.Async.timeOut.after(250), () =&gt; this._validate(message)
+        );
+      }
+&nbsp;
+      /**
+       * Send the input message by dispatching the send-message event
+       */
+      _sendMessage() {
+        if (!this._error) {
+          var sendMessageEvent = new CustomEvent('send-message', {
+            detail: {
+              message: this.message,
+            },
+          });
+          this.dispatchEvent(sendMessageEvent);
+          this.set('message', '');
+        }
+      }
+&nbsp;
+      /**
+       * Add form event listener and validate message for the first time
+       */
+      connectedCallback() {
+        super.connectedCallback();
+&nbsp;
+        this.$.form.addEventListener('submit', (event) =&gt; {
+          event.preventDefault();
+          this._sendMessage();
+        });
+      }
+&nbsp;
+      /**
+       * Validate message for the first time
+       */
+      ready() {
+        super.ready();
+        this._validate(this.message);
+      }
+&nbsp;
+      /**
+       * Return whether the message can be splitted or not
+       * @param {String} message - the input message
+       * @return {Boolean}
+       */
+      _canSplitMessage(message) {
+        return Boolean(this.$.helper.splitMessage(message));
+      }
+&nbsp;
+      /**
+      Fired when user tap the Tweet button
+      @event send-message
+      Event param: {{message: String}} detail Contains the sending message
+      */
+    }
+&nbsp;
+    window.customElements.define(TweetInput.is, TweetInput);
+&nbsp;
+  &lt;/script&gt;
+&lt;/dom-module&gt;
+&nbsp;</pre></td></tr>
+</tbody></table></pre></div><div class="footer"><div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Jul 17 2017 11:49:28 GMT+0000 (UTC)</div></div><script src="../prettify.js"></script><script>window.onload=function(){'function'===typeof prettyPrint&&prettyPrint()};</script><script src="../sorter.js"></script></body></html>

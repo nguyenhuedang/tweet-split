@@ -1,0 +1,5 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Multiple Registrations</title>
+    <script>if (!window.customElements) { document.write('<!--'); }</script>
+    <script type="text/javascript" src="../../webcomponentsjs/custom-elements-es5-adapter.js"></script>
+    <!--! do not remove -->
+<script src="../../webcomponentsjs/webcomponents-lite.js"></script><script src="../../web-component-tester/browser.js"></script><link rel="import" href="../test-fixture.html"><link rel="import" href="test-fixture-symlink.html"></head><body><script>test('multiple registrations',function(){for(var a=document.querySelectorAll('link[rel="import"]'),b=0;b<a.length;b++)assert.ok(a[b].import,'import loaded')});</script></body></html>

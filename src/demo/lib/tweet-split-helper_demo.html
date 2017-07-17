@@ -1,0 +1,128 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+
+  <title>tweet-split-helper demo</title>
+
+  <script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../bower_components/iron-autogrow-textarea/iron-autogrow-textarea.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../bower_components/iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../bower_components/polymer/lib/utils/debounce.html">
+  <link rel="import" href="../../src/lib/tweet-split-helper.html">
+
+  </head><custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+      tweet-input {
+        --primary-color: black;
+        font-family: monospace;
+      }
+
+      iron-autogrow-textarea {
+        box-sizing: border-box;
+        overflow: visible;
+        --iron-autogrow-textarea: {
+          box-sizing: border-box;
+          font-family: monospace;
+          font-size: 12px;
+          padding: 10px;
+        }
+      }
+    </style>
+  </custom-style>
+
+
+
+  <div class="vertical-section-container centered">
+    <demo-snippet>
+      <style>
+        iron-autogrow-textarea {
+          padding: 10px;
+        }
+
+        pre {
+          font-size: 12px;
+          padding: 5px;
+          margin: 5px;
+        }
+
+        .string {
+          color: green;
+        }
+
+        .number {
+          color: darkorange;
+        }
+
+        .boolean {
+          color: blue;
+        }
+
+        .null {
+          color: magenta;
+        }
+
+        .key {
+          color: red;
+        }
+      </style>
+
+
+      <template>
+        <tweet-split-helper id="helper"></tweet-split-helper>
+      </template>
+      <h5><code>message =</code></h5>
+      <iron-autogrow-textarea id="messageInput" rows="3"></iron-autogrow-textarea>
+      <h5><code>document.getElementById('helper').splitMessage(message) = </code></h5>
+      <pre id="content"></pre>
+
+      <script>
+        var messageInput = document.getElementById('messageInput');
+        var content = document.getElementById('content');
+        var helper = document.getElementById('helper');
+        var debouncer;
+        messageInput.addEventListener('value-changed', event => {
+          debouncer = Polymer.Debouncer.debounce(debouncer,
+            Polymer.Async.timeOut.after(250), () => {
+              var parts = helper.splitMessage(event.detail.value);
+              console.log(parts);
+              var jsonFormat = JSON.stringify(parts, null, 4);
+              content.innerHTML = syntaxHighlight(jsonFormat);
+            });
+        });
+        messageInput.value =
+          "I can't believe Tweeter now supports chunking my messages, so I don't have to do it myself.";
+      </script>
+
+
+      <script>
+        function syntaxHighlight(json) {
+          if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+          }
+          json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          return json.replace(
+            /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+            function(match) {
+              var cls = 'number';
+              if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                  cls = 'key';
+                } else {
+                  cls = 'string';
+                }
+              } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+              } else if (/null/.test(match)) {
+                cls = 'null';
+              }
+              return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+      </script>
+    </demo-snippet>
+  </div>
+
+
+</html>

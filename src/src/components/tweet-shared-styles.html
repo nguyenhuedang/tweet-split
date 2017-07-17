@@ -1,0 +1,31 @@
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<dom-module id="tweet-shared-styles">
+  <template>
+    <custom-style>
+      <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
+    </custom-style>
+
+    <style>
+       :root {
+        color: #333;
+        box-sizing: border-box;
+      }
+
+      button:active {
+        filter: brightness(0.8);
+      }
+
+      textarea {
+        margin-left: 0 !important;
+      }
+
+      textarea,
+      input,
+      button {
+        outline: none;
+      }
+
+    </style>
+  </template>
+</dom-module>
