@@ -22,7 +22,7 @@ before_script:
 script:
 - eslint . --ext js,html
 - xvfb-run wct --expanded --plugin istanbul --plugin xunit-reporter
-- cat ./logs/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js.
+- cat ./logs/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 - wct --plugin sauce
 - polymer analyze > analysis.json
 - polymer build
