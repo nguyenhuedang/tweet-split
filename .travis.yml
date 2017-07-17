@@ -22,8 +22,11 @@ before_script:
 script:
 - eslint . --ext js,html
 - xvfb-run wct --expanded
+- ls
+- xvfb-run ./node_modules/web-component-tester/bin/wct --expanded
+- ls
 - cat $TRAVIS_BUILD_DIR/logs/coverage/lcov.info | ./node_modules/.bin/coveralls
-- wct --plugin --expanded sauce
+- wct --plugin sauce
 - polymer analyze > analysis.json
 - polymer build
 
