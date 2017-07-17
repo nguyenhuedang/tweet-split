@@ -37,6 +37,6 @@
     "test/**/*"
   ],
   "extraDependencies": [
-    "logs"
+    "logs/**/*"
   ]
 }

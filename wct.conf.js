@@ -5,7 +5,6 @@ module.exports = {
       'browsers': ['chrome'],
     },
     'istanbul': {
-      'disabled': true,
       'verbose': true,
       'dir': 'logs/coverage',
       'reporters': ['text-summary', 'lcov'],
@@ -13,7 +12,6 @@ module.exports = {
       'exclude': ['**/test/**'],
     },
     'xunit-reporter': {
-      'disabled': true,
       'output': 'logs/test-results.xml',
     },
   },

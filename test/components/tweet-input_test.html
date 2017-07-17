@@ -105,9 +105,13 @@
         });
 
         suite('_messageChanged', function() {
-          test('should been called when form submit', function() {
-            sinon.spy(element, '_sendMessage');
+          test('should trigger validate after 250ms', function(done) {
+            sinon.spy(element, '_validate');
             element._messageChanged('abc');
+            setTimeout(function() {
+              expect(element._validate).has.been.called;
+              done();
+            }, 500);
           });
         });
 
