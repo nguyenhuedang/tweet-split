@@ -21,11 +21,8 @@ before_script:
 - bower install
 script:
 - eslint . --ext js,html
-- xvfb-run wct --expanded
-- ls
-- xvfb-run ./node_modules/web-component-tester/bin/wct --expanded
-- ls
-- cat $TRAVIS_BUILD_DIR/logs/coverage/lcov.info | ./node_modules/.bin/coveralls
+- xvfb-run wct --expanded --plugin istanbul --plugin xunit-reporter
+- cat ./logs/coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js.
 - wct --plugin sauce
 - polymer analyze > analysis.json
 - polymer build
