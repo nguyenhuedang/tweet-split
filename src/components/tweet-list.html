@@ -39,9 +39,15 @@ It may include a character counter for debugging.
 
       static get properties() {
         return {
+          /**
+           * List of tweets
+           */
           tweets: {
             type: Array,
           },
+          /**
+           * Will pass to tweet-item to render debugging information
+           */
           verbose: Boolean,
         };
       }

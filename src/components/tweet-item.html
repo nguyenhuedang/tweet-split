@@ -71,7 +71,14 @@ It may include a character counter for debugging.
 
       static get properties() {
         return {
+          /**
+           * The tweet to display
+           */
           tweet: Object,
+
+          /**
+           * Whether to display to debugging information or not
+           */
           verbose: Boolean,
         };
       }
